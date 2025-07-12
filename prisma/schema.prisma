@@ -22,3 +22,22 @@ generator prismabox {
   inputModel                  = true
   output                      = "../src/schemas"
 }
+
+enum Role {
+  reader
+  admin
+}
+
+model User {
+  id String @id @default(ulid())
+
+  username String @unique
+  password String
+  /// @prismabox.input.hide
+  role     Role   @default(reader)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("users")
+}
