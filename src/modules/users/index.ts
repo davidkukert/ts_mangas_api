@@ -83,7 +83,7 @@ export const users = new Elysia({ name: 'Module.Users', prefix: '/users' })
 		'/:id',
 		async ({ db, params: { id } }) => {
 			await db.user.delete({ where: { id } })
-			return { message: 'User deleted successfully' }
+			return { success: true }
 		},
 		{
 			privateRoute: true,

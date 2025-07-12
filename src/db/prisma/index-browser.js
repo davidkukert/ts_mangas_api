@@ -129,6 +129,21 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.MangaScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  alternativeTitles: 'alternativeTitles',
+  description: 'description',
+  originalLanguage: 'originalLanguage',
+  publicationDemographic: 'publicationDemographic',
+  status: 'status',
+  year: 'year',
+  contentRating: 'contentRating',
+  state: 'state',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -138,13 +153,47 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
 exports.Role = exports.$Enums.Role = {
   reader: 'reader',
   admin: 'admin'
 };
 
+exports.DemographicEnum = exports.$Enums.DemographicEnum = {
+  shounen: 'shounen',
+  shoujo: 'shoujo',
+  seinen: 'seinen',
+  josei: 'josei'
+};
+
+exports.StatusEnum = exports.$Enums.StatusEnum = {
+  ongoing: 'ongoing',
+  completed: 'completed',
+  hiatus: 'hiatus',
+  cancelled: 'cancelled'
+};
+
+exports.ContentRatingEnum = exports.$Enums.ContentRatingEnum = {
+  safe: 'safe',
+  suggestive: 'suggestive',
+  erotica: 'erotica',
+  pornographic: 'pornographic'
+};
+
+exports.StateEnum = exports.$Enums.StateEnum = {
+  draft: 'draft',
+  published: 'published',
+  submitted: 'submitted',
+  rejected: 'rejected'
+};
+
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Manga: 'Manga'
 };
 
 /**

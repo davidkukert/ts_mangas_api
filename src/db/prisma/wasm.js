@@ -101,6 +101,21 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.MangaScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  alternativeTitles: 'alternativeTitles',
+  description: 'description',
+  originalLanguage: 'originalLanguage',
+  publicationDemographic: 'publicationDemographic',
+  status: 'status',
+  year: 'year',
+  contentRating: 'contentRating',
+  state: 'state',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -110,13 +125,47 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
 exports.Role = exports.$Enums.Role = {
   reader: 'reader',
   admin: 'admin'
 };
 
+exports.StatusEnum = exports.$Enums.StatusEnum = {
+  ongoing: 'ongoing',
+  completed: 'completed',
+  hiatus: 'hiatus',
+  cancelled: 'cancelled'
+};
+
+exports.ContentRatingEnum = exports.$Enums.ContentRatingEnum = {
+  safe: 'safe',
+  suggestive: 'suggestive',
+  erotica: 'erotica',
+  pornographic: 'pornographic'
+};
+
+exports.StateEnum = exports.$Enums.StateEnum = {
+  draft: 'draft',
+  published: 'published',
+  submitted: 'submitted',
+  rejected: 'rejected'
+};
+
+exports.DemographicEnum = exports.$Enums.DemographicEnum = {
+  shounen: 'shounen',
+  shoujo: 'shoujo',
+  seinen: 'seinen',
+  josei: 'josei'
+};
+
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Manga: 'Manga'
 };
 /**
  * Create the Client
@@ -168,13 +217,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider        = \"prisma-client-js\"\n  previewFeatures = [\"queryCompiler\", \"driverAdapters\"]\n  output          = \"../src/db/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\ngenerator prismabox {\n  provider                    = \"prismabox\"\n  typeboxImportDependencyName = \"elysia\"\n  typeboxImportVariableName   = \"t\"\n  inputModel                  = true\n  output                      = \"../src/schemas\"\n}\n\nenum Role {\n  reader\n  admin\n}\n\nmodel User {\n  id String @id @default(ulid())\n\n  username String @unique\n  password String\n  /// @prismabox.input.hide\n  role     Role   @default(reader)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @default(now()) @updatedAt @map(\"updated_at\")\n\n  @@map(\"users\")\n}\n",
-  "inlineSchemaHash": "c199169bd734da0733c2dc962a80936332c26faf0fade4a8b6c744edaed4f396",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider        = \"prisma-client-js\"\n  previewFeatures = [\"queryCompiler\", \"driverAdapters\"]\n  output          = \"../src/db/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\ngenerator prismabox {\n  provider                    = \"prismabox\"\n  typeboxImportDependencyName = \"elysia\"\n  typeboxImportVariableName   = \"t\"\n  inputModel                  = true\n  output                      = \"../src/schemas\"\n}\n\nenum Role {\n  reader\n  admin\n}\n\nmodel User {\n  id String @id @default(ulid())\n\n  username String @unique\n  password String\n  /// @prismabox.input.hide\n  role     Role   @default(reader)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @default(now()) @updatedAt @map(\"updated_at\")\n\n  @@map(\"users\")\n}\n\nenum StatusEnum {\n  ongoing\n  completed\n  hiatus\n  cancelled\n}\n\nenum ContentRatingEnum {\n  safe\n  suggestive\n  erotica\n  pornographic\n}\n\nenum StateEnum {\n  draft\n  published\n  submitted\n  rejected\n}\n\nenum DemographicEnum {\n  shounen\n  shoujo\n  seinen\n  josei\n}\n\nmodel Manga {\n  id String @id @default(ulid())\n\n  title                  String            @unique\n  alternativeTitles      String[]          @default([]) @map(\"alternative_titles\")\n  description            String?\n  originalLanguage       String            @map(\"original_language\")\n  publicationDemographic DemographicEnum?  @map(\"publication_demographic\")\n  status                 StatusEnum\n  year                   Int?\n  contentRating          ContentRatingEnum @map(\"content_rating\")\n  state                  StateEnum\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @default(now()) @updatedAt @map(\"updated_at\")\n\n  @@map(\"mangas\")\n}\n",
+  "inlineSchemaHash": "01a2e213f5f845c1a4314aee8aa6923330e7241d1567d6330e284f1b8b5b8939",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"users\"}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"users\"},\"Manga\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"alternativeTitles\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"alternative_titles\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"originalLanguage\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"original_language\"},{\"name\":\"publicationDemographic\",\"kind\":\"enum\",\"type\":\"DemographicEnum\",\"dbName\":\"publication_demographic\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"StatusEnum\"},{\"name\":\"year\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"contentRating\",\"kind\":\"enum\",\"type\":\"ContentRatingEnum\",\"dbName\":\"content_rating\"},{\"name\":\"state\",\"kind\":\"enum\",\"type\":\"StateEnum\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"mangas\"}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = undefined
 config.compilerWasm = {

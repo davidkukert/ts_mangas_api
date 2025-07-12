@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model Manga
+ * 
+ */
+export type Manga = $Result.DefaultSelection<Prisma.$MangaPayload>
 
 /**
  * Enums
@@ -30,11 +35,67 @@ export namespace $Enums {
 
 export type Role = (typeof Role)[keyof typeof Role]
 
+
+export const StatusEnum: {
+  ongoing: 'ongoing',
+  completed: 'completed',
+  hiatus: 'hiatus',
+  cancelled: 'cancelled'
+};
+
+export type StatusEnum = (typeof StatusEnum)[keyof typeof StatusEnum]
+
+
+export const ContentRatingEnum: {
+  safe: 'safe',
+  suggestive: 'suggestive',
+  erotica: 'erotica',
+  pornographic: 'pornographic'
+};
+
+export type ContentRatingEnum = (typeof ContentRatingEnum)[keyof typeof ContentRatingEnum]
+
+
+export const StateEnum: {
+  draft: 'draft',
+  published: 'published',
+  submitted: 'submitted',
+  rejected: 'rejected'
+};
+
+export type StateEnum = (typeof StateEnum)[keyof typeof StateEnum]
+
+
+export const DemographicEnum: {
+  shounen: 'shounen',
+  shoujo: 'shoujo',
+  seinen: 'seinen',
+  josei: 'josei'
+};
+
+export type DemographicEnum = (typeof DemographicEnum)[keyof typeof DemographicEnum]
+
 }
 
 export type Role = $Enums.Role
 
 export const Role: typeof $Enums.Role
+
+export type StatusEnum = $Enums.StatusEnum
+
+export const StatusEnum: typeof $Enums.StatusEnum
+
+export type ContentRatingEnum = $Enums.ContentRatingEnum
+
+export const ContentRatingEnum: typeof $Enums.ContentRatingEnum
+
+export type StateEnum = $Enums.StateEnum
+
+export const StateEnum: typeof $Enums.StateEnum
+
+export type DemographicEnum = $Enums.DemographicEnum
+
+export const DemographicEnum: typeof $Enums.DemographicEnum
 
 /**
  * ##  Prisma Client ʲˢ
@@ -170,6 +231,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.manga`: Exposes CRUD operations for the **Manga** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Manga
+    * const manga = await prisma.manga.findMany()
+    * ```
+    */
+  get manga(): Prisma.MangaDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -610,7 +681,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    User: 'User'
+    User: 'User',
+    Manga: 'Manga'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -629,7 +701,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user"
+      modelProps: "user" | "manga"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -704,6 +776,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Manga: {
+        payload: Prisma.$MangaPayload<ExtArgs>
+        fields: Prisma.MangaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MangaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MangaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MangaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MangaPayload>
+          }
+          findFirst: {
+            args: Prisma.MangaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MangaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MangaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MangaPayload>
+          }
+          findMany: {
+            args: Prisma.MangaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MangaPayload>[]
+          }
+          create: {
+            args: Prisma.MangaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MangaPayload>
+          }
+          createMany: {
+            args: Prisma.MangaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MangaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MangaPayload>[]
+          }
+          delete: {
+            args: Prisma.MangaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MangaPayload>
+          }
+          update: {
+            args: Prisma.MangaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MangaPayload>
+          }
+          deleteMany: {
+            args: Prisma.MangaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MangaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MangaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MangaPayload>[]
+          }
+          upsert: {
+            args: Prisma.MangaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MangaPayload>
+          }
+          aggregate: {
+            args: Prisma.MangaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateManga>
+          }
+          groupBy: {
+            args: Prisma.MangaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MangaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MangaCountArgs<ExtArgs>
+            result: $Utils.Optional<MangaCountAggregateOutputType> | number
           }
         }
       }
@@ -796,6 +942,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    manga?: MangaOmit
   }
 
   /* Types for Logging */
@@ -1902,6 +2049,1122 @@ export namespace Prisma {
 
 
   /**
+   * Model Manga
+   */
+
+  export type AggregateManga = {
+    _count: MangaCountAggregateOutputType | null
+    _avg: MangaAvgAggregateOutputType | null
+    _sum: MangaSumAggregateOutputType | null
+    _min: MangaMinAggregateOutputType | null
+    _max: MangaMaxAggregateOutputType | null
+  }
+
+  export type MangaAvgAggregateOutputType = {
+    year: number | null
+  }
+
+  export type MangaSumAggregateOutputType = {
+    year: number | null
+  }
+
+  export type MangaMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    originalLanguage: string | null
+    publicationDemographic: $Enums.DemographicEnum | null
+    status: $Enums.StatusEnum | null
+    year: number | null
+    contentRating: $Enums.ContentRatingEnum | null
+    state: $Enums.StateEnum | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MangaMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    originalLanguage: string | null
+    publicationDemographic: $Enums.DemographicEnum | null
+    status: $Enums.StatusEnum | null
+    year: number | null
+    contentRating: $Enums.ContentRatingEnum | null
+    state: $Enums.StateEnum | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MangaCountAggregateOutputType = {
+    id: number
+    title: number
+    alternativeTitles: number
+    description: number
+    originalLanguage: number
+    publicationDemographic: number
+    status: number
+    year: number
+    contentRating: number
+    state: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MangaAvgAggregateInputType = {
+    year?: true
+  }
+
+  export type MangaSumAggregateInputType = {
+    year?: true
+  }
+
+  export type MangaMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    originalLanguage?: true
+    publicationDemographic?: true
+    status?: true
+    year?: true
+    contentRating?: true
+    state?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MangaMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    originalLanguage?: true
+    publicationDemographic?: true
+    status?: true
+    year?: true
+    contentRating?: true
+    state?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MangaCountAggregateInputType = {
+    id?: true
+    title?: true
+    alternativeTitles?: true
+    description?: true
+    originalLanguage?: true
+    publicationDemographic?: true
+    status?: true
+    year?: true
+    contentRating?: true
+    state?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MangaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Manga to aggregate.
+     */
+    where?: MangaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Manga to fetch.
+     */
+    orderBy?: MangaOrderByWithRelationInput | MangaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MangaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Manga from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Manga.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Manga
+    **/
+    _count?: true | MangaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MangaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MangaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MangaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MangaMaxAggregateInputType
+  }
+
+  export type GetMangaAggregateType<T extends MangaAggregateArgs> = {
+        [P in keyof T & keyof AggregateManga]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateManga[P]>
+      : GetScalarType<T[P], AggregateManga[P]>
+  }
+
+
+
+
+  export type MangaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MangaWhereInput
+    orderBy?: MangaOrderByWithAggregationInput | MangaOrderByWithAggregationInput[]
+    by: MangaScalarFieldEnum[] | MangaScalarFieldEnum
+    having?: MangaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MangaCountAggregateInputType | true
+    _avg?: MangaAvgAggregateInputType
+    _sum?: MangaSumAggregateInputType
+    _min?: MangaMinAggregateInputType
+    _max?: MangaMaxAggregateInputType
+  }
+
+  export type MangaGroupByOutputType = {
+    id: string
+    title: string
+    alternativeTitles: string[]
+    description: string | null
+    originalLanguage: string
+    publicationDemographic: $Enums.DemographicEnum | null
+    status: $Enums.StatusEnum
+    year: number | null
+    contentRating: $Enums.ContentRatingEnum
+    state: $Enums.StateEnum
+    createdAt: Date
+    updatedAt: Date
+    _count: MangaCountAggregateOutputType | null
+    _avg: MangaAvgAggregateOutputType | null
+    _sum: MangaSumAggregateOutputType | null
+    _min: MangaMinAggregateOutputType | null
+    _max: MangaMaxAggregateOutputType | null
+  }
+
+  type GetMangaGroupByPayload<T extends MangaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MangaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MangaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MangaGroupByOutputType[P]>
+            : GetScalarType<T[P], MangaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MangaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    alternativeTitles?: boolean
+    description?: boolean
+    originalLanguage?: boolean
+    publicationDemographic?: boolean
+    status?: boolean
+    year?: boolean
+    contentRating?: boolean
+    state?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["manga"]>
+
+  export type MangaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    alternativeTitles?: boolean
+    description?: boolean
+    originalLanguage?: boolean
+    publicationDemographic?: boolean
+    status?: boolean
+    year?: boolean
+    contentRating?: boolean
+    state?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["manga"]>
+
+  export type MangaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    alternativeTitles?: boolean
+    description?: boolean
+    originalLanguage?: boolean
+    publicationDemographic?: boolean
+    status?: boolean
+    year?: boolean
+    contentRating?: boolean
+    state?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["manga"]>
+
+  export type MangaSelectScalar = {
+    id?: boolean
+    title?: boolean
+    alternativeTitles?: boolean
+    description?: boolean
+    originalLanguage?: boolean
+    publicationDemographic?: boolean
+    status?: boolean
+    year?: boolean
+    contentRating?: boolean
+    state?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MangaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "alternativeTitles" | "description" | "originalLanguage" | "publicationDemographic" | "status" | "year" | "contentRating" | "state" | "createdAt" | "updatedAt", ExtArgs["result"]["manga"]>
+
+  export type $MangaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Manga"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      alternativeTitles: string[]
+      description: string | null
+      originalLanguage: string
+      publicationDemographic: $Enums.DemographicEnum | null
+      status: $Enums.StatusEnum
+      year: number | null
+      contentRating: $Enums.ContentRatingEnum
+      state: $Enums.StateEnum
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["manga"]>
+    composites: {}
+  }
+
+  type MangaGetPayload<S extends boolean | null | undefined | MangaDefaultArgs> = $Result.GetResult<Prisma.$MangaPayload, S>
+
+  type MangaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MangaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MangaCountAggregateInputType | true
+    }
+
+  export interface MangaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Manga'], meta: { name: 'Manga' } }
+    /**
+     * Find zero or one Manga that matches the filter.
+     * @param {MangaFindUniqueArgs} args - Arguments to find a Manga
+     * @example
+     * // Get one Manga
+     * const manga = await prisma.manga.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MangaFindUniqueArgs>(args: SelectSubset<T, MangaFindUniqueArgs<ExtArgs>>): Prisma__MangaClient<$Result.GetResult<Prisma.$MangaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Manga that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MangaFindUniqueOrThrowArgs} args - Arguments to find a Manga
+     * @example
+     * // Get one Manga
+     * const manga = await prisma.manga.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MangaFindUniqueOrThrowArgs>(args: SelectSubset<T, MangaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MangaClient<$Result.GetResult<Prisma.$MangaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Manga that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MangaFindFirstArgs} args - Arguments to find a Manga
+     * @example
+     * // Get one Manga
+     * const manga = await prisma.manga.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MangaFindFirstArgs>(args?: SelectSubset<T, MangaFindFirstArgs<ExtArgs>>): Prisma__MangaClient<$Result.GetResult<Prisma.$MangaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Manga that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MangaFindFirstOrThrowArgs} args - Arguments to find a Manga
+     * @example
+     * // Get one Manga
+     * const manga = await prisma.manga.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MangaFindFirstOrThrowArgs>(args?: SelectSubset<T, MangaFindFirstOrThrowArgs<ExtArgs>>): Prisma__MangaClient<$Result.GetResult<Prisma.$MangaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Manga that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MangaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Manga
+     * const manga = await prisma.manga.findMany()
+     * 
+     * // Get first 10 Manga
+     * const manga = await prisma.manga.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mangaWithIdOnly = await prisma.manga.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MangaFindManyArgs>(args?: SelectSubset<T, MangaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MangaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Manga.
+     * @param {MangaCreateArgs} args - Arguments to create a Manga.
+     * @example
+     * // Create one Manga
+     * const Manga = await prisma.manga.create({
+     *   data: {
+     *     // ... data to create a Manga
+     *   }
+     * })
+     * 
+     */
+    create<T extends MangaCreateArgs>(args: SelectSubset<T, MangaCreateArgs<ExtArgs>>): Prisma__MangaClient<$Result.GetResult<Prisma.$MangaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Manga.
+     * @param {MangaCreateManyArgs} args - Arguments to create many Manga.
+     * @example
+     * // Create many Manga
+     * const manga = await prisma.manga.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MangaCreateManyArgs>(args?: SelectSubset<T, MangaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Manga and returns the data saved in the database.
+     * @param {MangaCreateManyAndReturnArgs} args - Arguments to create many Manga.
+     * @example
+     * // Create many Manga
+     * const manga = await prisma.manga.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Manga and only return the `id`
+     * const mangaWithIdOnly = await prisma.manga.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MangaCreateManyAndReturnArgs>(args?: SelectSubset<T, MangaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MangaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Manga.
+     * @param {MangaDeleteArgs} args - Arguments to delete one Manga.
+     * @example
+     * // Delete one Manga
+     * const Manga = await prisma.manga.delete({
+     *   where: {
+     *     // ... filter to delete one Manga
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MangaDeleteArgs>(args: SelectSubset<T, MangaDeleteArgs<ExtArgs>>): Prisma__MangaClient<$Result.GetResult<Prisma.$MangaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Manga.
+     * @param {MangaUpdateArgs} args - Arguments to update one Manga.
+     * @example
+     * // Update one Manga
+     * const manga = await prisma.manga.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MangaUpdateArgs>(args: SelectSubset<T, MangaUpdateArgs<ExtArgs>>): Prisma__MangaClient<$Result.GetResult<Prisma.$MangaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Manga.
+     * @param {MangaDeleteManyArgs} args - Arguments to filter Manga to delete.
+     * @example
+     * // Delete a few Manga
+     * const { count } = await prisma.manga.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MangaDeleteManyArgs>(args?: SelectSubset<T, MangaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Manga.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MangaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Manga
+     * const manga = await prisma.manga.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MangaUpdateManyArgs>(args: SelectSubset<T, MangaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Manga and returns the data updated in the database.
+     * @param {MangaUpdateManyAndReturnArgs} args - Arguments to update many Manga.
+     * @example
+     * // Update many Manga
+     * const manga = await prisma.manga.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Manga and only return the `id`
+     * const mangaWithIdOnly = await prisma.manga.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MangaUpdateManyAndReturnArgs>(args: SelectSubset<T, MangaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MangaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Manga.
+     * @param {MangaUpsertArgs} args - Arguments to update or create a Manga.
+     * @example
+     * // Update or create a Manga
+     * const manga = await prisma.manga.upsert({
+     *   create: {
+     *     // ... data to create a Manga
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Manga we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MangaUpsertArgs>(args: SelectSubset<T, MangaUpsertArgs<ExtArgs>>): Prisma__MangaClient<$Result.GetResult<Prisma.$MangaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Manga.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MangaCountArgs} args - Arguments to filter Manga to count.
+     * @example
+     * // Count the number of Manga
+     * const count = await prisma.manga.count({
+     *   where: {
+     *     // ... the filter for the Manga we want to count
+     *   }
+     * })
+    **/
+    count<T extends MangaCountArgs>(
+      args?: Subset<T, MangaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MangaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Manga.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MangaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MangaAggregateArgs>(args: Subset<T, MangaAggregateArgs>): Prisma.PrismaPromise<GetMangaAggregateType<T>>
+
+    /**
+     * Group by Manga.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MangaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MangaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MangaGroupByArgs['orderBy'] }
+        : { orderBy?: MangaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MangaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMangaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Manga model
+   */
+  readonly fields: MangaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Manga.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MangaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Manga model
+   */
+  interface MangaFieldRefs {
+    readonly id: FieldRef<"Manga", 'String'>
+    readonly title: FieldRef<"Manga", 'String'>
+    readonly alternativeTitles: FieldRef<"Manga", 'String[]'>
+    readonly description: FieldRef<"Manga", 'String'>
+    readonly originalLanguage: FieldRef<"Manga", 'String'>
+    readonly publicationDemographic: FieldRef<"Manga", 'DemographicEnum'>
+    readonly status: FieldRef<"Manga", 'StatusEnum'>
+    readonly year: FieldRef<"Manga", 'Int'>
+    readonly contentRating: FieldRef<"Manga", 'ContentRatingEnum'>
+    readonly state: FieldRef<"Manga", 'StateEnum'>
+    readonly createdAt: FieldRef<"Manga", 'DateTime'>
+    readonly updatedAt: FieldRef<"Manga", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Manga findUnique
+   */
+  export type MangaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Manga
+     */
+    select?: MangaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Manga
+     */
+    omit?: MangaOmit<ExtArgs> | null
+    /**
+     * Filter, which Manga to fetch.
+     */
+    where: MangaWhereUniqueInput
+  }
+
+  /**
+   * Manga findUniqueOrThrow
+   */
+  export type MangaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Manga
+     */
+    select?: MangaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Manga
+     */
+    omit?: MangaOmit<ExtArgs> | null
+    /**
+     * Filter, which Manga to fetch.
+     */
+    where: MangaWhereUniqueInput
+  }
+
+  /**
+   * Manga findFirst
+   */
+  export type MangaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Manga
+     */
+    select?: MangaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Manga
+     */
+    omit?: MangaOmit<ExtArgs> | null
+    /**
+     * Filter, which Manga to fetch.
+     */
+    where?: MangaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Manga to fetch.
+     */
+    orderBy?: MangaOrderByWithRelationInput | MangaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Manga.
+     */
+    cursor?: MangaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Manga from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Manga.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Manga.
+     */
+    distinct?: MangaScalarFieldEnum | MangaScalarFieldEnum[]
+  }
+
+  /**
+   * Manga findFirstOrThrow
+   */
+  export type MangaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Manga
+     */
+    select?: MangaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Manga
+     */
+    omit?: MangaOmit<ExtArgs> | null
+    /**
+     * Filter, which Manga to fetch.
+     */
+    where?: MangaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Manga to fetch.
+     */
+    orderBy?: MangaOrderByWithRelationInput | MangaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Manga.
+     */
+    cursor?: MangaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Manga from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Manga.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Manga.
+     */
+    distinct?: MangaScalarFieldEnum | MangaScalarFieldEnum[]
+  }
+
+  /**
+   * Manga findMany
+   */
+  export type MangaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Manga
+     */
+    select?: MangaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Manga
+     */
+    omit?: MangaOmit<ExtArgs> | null
+    /**
+     * Filter, which Manga to fetch.
+     */
+    where?: MangaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Manga to fetch.
+     */
+    orderBy?: MangaOrderByWithRelationInput | MangaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Manga.
+     */
+    cursor?: MangaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Manga from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Manga.
+     */
+    skip?: number
+    distinct?: MangaScalarFieldEnum | MangaScalarFieldEnum[]
+  }
+
+  /**
+   * Manga create
+   */
+  export type MangaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Manga
+     */
+    select?: MangaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Manga
+     */
+    omit?: MangaOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Manga.
+     */
+    data: XOR<MangaCreateInput, MangaUncheckedCreateInput>
+  }
+
+  /**
+   * Manga createMany
+   */
+  export type MangaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Manga.
+     */
+    data: MangaCreateManyInput | MangaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Manga createManyAndReturn
+   */
+  export type MangaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Manga
+     */
+    select?: MangaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Manga
+     */
+    omit?: MangaOmit<ExtArgs> | null
+    /**
+     * The data used to create many Manga.
+     */
+    data: MangaCreateManyInput | MangaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Manga update
+   */
+  export type MangaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Manga
+     */
+    select?: MangaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Manga
+     */
+    omit?: MangaOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Manga.
+     */
+    data: XOR<MangaUpdateInput, MangaUncheckedUpdateInput>
+    /**
+     * Choose, which Manga to update.
+     */
+    where: MangaWhereUniqueInput
+  }
+
+  /**
+   * Manga updateMany
+   */
+  export type MangaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Manga.
+     */
+    data: XOR<MangaUpdateManyMutationInput, MangaUncheckedUpdateManyInput>
+    /**
+     * Filter which Manga to update
+     */
+    where?: MangaWhereInput
+    /**
+     * Limit how many Manga to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Manga updateManyAndReturn
+   */
+  export type MangaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Manga
+     */
+    select?: MangaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Manga
+     */
+    omit?: MangaOmit<ExtArgs> | null
+    /**
+     * The data used to update Manga.
+     */
+    data: XOR<MangaUpdateManyMutationInput, MangaUncheckedUpdateManyInput>
+    /**
+     * Filter which Manga to update
+     */
+    where?: MangaWhereInput
+    /**
+     * Limit how many Manga to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Manga upsert
+   */
+  export type MangaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Manga
+     */
+    select?: MangaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Manga
+     */
+    omit?: MangaOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Manga to update in case it exists.
+     */
+    where: MangaWhereUniqueInput
+    /**
+     * In case the Manga found by the `where` argument doesn't exist, create a new Manga with this data.
+     */
+    create: XOR<MangaCreateInput, MangaUncheckedCreateInput>
+    /**
+     * In case the Manga was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MangaUpdateInput, MangaUncheckedUpdateInput>
+  }
+
+  /**
+   * Manga delete
+   */
+  export type MangaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Manga
+     */
+    select?: MangaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Manga
+     */
+    omit?: MangaOmit<ExtArgs> | null
+    /**
+     * Filter which Manga to delete.
+     */
+    where: MangaWhereUniqueInput
+  }
+
+  /**
+   * Manga deleteMany
+   */
+  export type MangaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Manga to delete
+     */
+    where?: MangaWhereInput
+    /**
+     * Limit how many Manga to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Manga without action
+   */
+  export type MangaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Manga
+     */
+    select?: MangaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Manga
+     */
+    omit?: MangaOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -1927,6 +3190,24 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const MangaScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    alternativeTitles: 'alternativeTitles',
+    description: 'description',
+    originalLanguage: 'originalLanguage',
+    publicationDemographic: 'publicationDemographic',
+    status: 'status',
+    year: 'year',
+    contentRating: 'contentRating',
+    state: 'state',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MangaScalarFieldEnum = (typeof MangaScalarFieldEnum)[keyof typeof MangaScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -1941,6 +3222,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -1991,6 +3280,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DemographicEnum'
+   */
+  export type EnumDemographicEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DemographicEnum'>
+    
+
+
+  /**
+   * Reference to a field of type 'DemographicEnum[]'
+   */
+  export type ListEnumDemographicEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DemographicEnum[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusEnum'
+   */
+  export type EnumStatusEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusEnum'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusEnum[]'
+   */
+  export type ListEnumStatusEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusEnum[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -2001,6 +3318,48 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ContentRatingEnum'
+   */
+  export type EnumContentRatingEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContentRatingEnum'>
+    
+
+
+  /**
+   * Reference to a field of type 'ContentRatingEnum[]'
+   */
+  export type ListEnumContentRatingEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContentRatingEnum[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'StateEnum'
+   */
+  export type EnumStateEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StateEnum'>
+    
+
+
+  /**
+   * Reference to a field of type 'StateEnum[]'
+   */
+  export type ListEnumStateEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StateEnum[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -2064,6 +3423,95 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
+  export type MangaWhereInput = {
+    AND?: MangaWhereInput | MangaWhereInput[]
+    OR?: MangaWhereInput[]
+    NOT?: MangaWhereInput | MangaWhereInput[]
+    id?: StringFilter<"Manga"> | string
+    title?: StringFilter<"Manga"> | string
+    alternativeTitles?: StringNullableListFilter<"Manga">
+    description?: StringNullableFilter<"Manga"> | string | null
+    originalLanguage?: StringFilter<"Manga"> | string
+    publicationDemographic?: EnumDemographicEnumNullableFilter<"Manga"> | $Enums.DemographicEnum | null
+    status?: EnumStatusEnumFilter<"Manga"> | $Enums.StatusEnum
+    year?: IntNullableFilter<"Manga"> | number | null
+    contentRating?: EnumContentRatingEnumFilter<"Manga"> | $Enums.ContentRatingEnum
+    state?: EnumStateEnumFilter<"Manga"> | $Enums.StateEnum
+    createdAt?: DateTimeFilter<"Manga"> | Date | string
+    updatedAt?: DateTimeFilter<"Manga"> | Date | string
+  }
+
+  export type MangaOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    alternativeTitles?: SortOrder
+    description?: SortOrderInput | SortOrder
+    originalLanguage?: SortOrder
+    publicationDemographic?: SortOrderInput | SortOrder
+    status?: SortOrder
+    year?: SortOrderInput | SortOrder
+    contentRating?: SortOrder
+    state?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MangaWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    title?: string
+    AND?: MangaWhereInput | MangaWhereInput[]
+    OR?: MangaWhereInput[]
+    NOT?: MangaWhereInput | MangaWhereInput[]
+    alternativeTitles?: StringNullableListFilter<"Manga">
+    description?: StringNullableFilter<"Manga"> | string | null
+    originalLanguage?: StringFilter<"Manga"> | string
+    publicationDemographic?: EnumDemographicEnumNullableFilter<"Manga"> | $Enums.DemographicEnum | null
+    status?: EnumStatusEnumFilter<"Manga"> | $Enums.StatusEnum
+    year?: IntNullableFilter<"Manga"> | number | null
+    contentRating?: EnumContentRatingEnumFilter<"Manga"> | $Enums.ContentRatingEnum
+    state?: EnumStateEnumFilter<"Manga"> | $Enums.StateEnum
+    createdAt?: DateTimeFilter<"Manga"> | Date | string
+    updatedAt?: DateTimeFilter<"Manga"> | Date | string
+  }, "id" | "title">
+
+  export type MangaOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    alternativeTitles?: SortOrder
+    description?: SortOrderInput | SortOrder
+    originalLanguage?: SortOrder
+    publicationDemographic?: SortOrderInput | SortOrder
+    status?: SortOrder
+    year?: SortOrderInput | SortOrder
+    contentRating?: SortOrder
+    state?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MangaCountOrderByAggregateInput
+    _avg?: MangaAvgOrderByAggregateInput
+    _max?: MangaMaxOrderByAggregateInput
+    _min?: MangaMinOrderByAggregateInput
+    _sum?: MangaSumOrderByAggregateInput
+  }
+
+  export type MangaScalarWhereWithAggregatesInput = {
+    AND?: MangaScalarWhereWithAggregatesInput | MangaScalarWhereWithAggregatesInput[]
+    OR?: MangaScalarWhereWithAggregatesInput[]
+    NOT?: MangaScalarWhereWithAggregatesInput | MangaScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Manga"> | string
+    title?: StringWithAggregatesFilter<"Manga"> | string
+    alternativeTitles?: StringNullableListFilter<"Manga">
+    description?: StringNullableWithAggregatesFilter<"Manga"> | string | null
+    originalLanguage?: StringWithAggregatesFilter<"Manga"> | string
+    publicationDemographic?: EnumDemographicEnumNullableWithAggregatesFilter<"Manga"> | $Enums.DemographicEnum | null
+    status?: EnumStatusEnumWithAggregatesFilter<"Manga"> | $Enums.StatusEnum
+    year?: IntNullableWithAggregatesFilter<"Manga"> | number | null
+    contentRating?: EnumContentRatingEnumWithAggregatesFilter<"Manga"> | $Enums.ContentRatingEnum
+    state?: EnumStateEnumWithAggregatesFilter<"Manga"> | $Enums.StateEnum
+    createdAt?: DateTimeWithAggregatesFilter<"Manga"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Manga"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     username: string
@@ -2123,6 +3571,111 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MangaCreateInput = {
+    id?: string
+    title: string
+    alternativeTitles?: MangaCreatealternativeTitlesInput | string[]
+    description?: string | null
+    originalLanguage: string
+    publicationDemographic?: $Enums.DemographicEnum | null
+    status: $Enums.StatusEnum
+    year?: number | null
+    contentRating: $Enums.ContentRatingEnum
+    state: $Enums.StateEnum
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MangaUncheckedCreateInput = {
+    id?: string
+    title: string
+    alternativeTitles?: MangaCreatealternativeTitlesInput | string[]
+    description?: string | null
+    originalLanguage: string
+    publicationDemographic?: $Enums.DemographicEnum | null
+    status: $Enums.StatusEnum
+    year?: number | null
+    contentRating: $Enums.ContentRatingEnum
+    state: $Enums.StateEnum
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MangaUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    alternativeTitles?: MangaUpdatealternativeTitlesInput | string[]
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    originalLanguage?: StringFieldUpdateOperationsInput | string
+    publicationDemographic?: NullableEnumDemographicEnumFieldUpdateOperationsInput | $Enums.DemographicEnum | null
+    status?: EnumStatusEnumFieldUpdateOperationsInput | $Enums.StatusEnum
+    year?: NullableIntFieldUpdateOperationsInput | number | null
+    contentRating?: EnumContentRatingEnumFieldUpdateOperationsInput | $Enums.ContentRatingEnum
+    state?: EnumStateEnumFieldUpdateOperationsInput | $Enums.StateEnum
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MangaUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    alternativeTitles?: MangaUpdatealternativeTitlesInput | string[]
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    originalLanguage?: StringFieldUpdateOperationsInput | string
+    publicationDemographic?: NullableEnumDemographicEnumFieldUpdateOperationsInput | $Enums.DemographicEnum | null
+    status?: EnumStatusEnumFieldUpdateOperationsInput | $Enums.StatusEnum
+    year?: NullableIntFieldUpdateOperationsInput | number | null
+    contentRating?: EnumContentRatingEnumFieldUpdateOperationsInput | $Enums.ContentRatingEnum
+    state?: EnumStateEnumFieldUpdateOperationsInput | $Enums.StateEnum
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MangaCreateManyInput = {
+    id?: string
+    title: string
+    alternativeTitles?: MangaCreatealternativeTitlesInput | string[]
+    description?: string | null
+    originalLanguage: string
+    publicationDemographic?: $Enums.DemographicEnum | null
+    status: $Enums.StatusEnum
+    year?: number | null
+    contentRating: $Enums.ContentRatingEnum
+    state: $Enums.StateEnum
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MangaUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    alternativeTitles?: MangaUpdatealternativeTitlesInput | string[]
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    originalLanguage?: StringFieldUpdateOperationsInput | string
+    publicationDemographic?: NullableEnumDemographicEnumFieldUpdateOperationsInput | $Enums.DemographicEnum | null
+    status?: EnumStatusEnumFieldUpdateOperationsInput | $Enums.StatusEnum
+    year?: NullableIntFieldUpdateOperationsInput | number | null
+    contentRating?: EnumContentRatingEnumFieldUpdateOperationsInput | $Enums.ContentRatingEnum
+    state?: EnumStateEnumFieldUpdateOperationsInput | $Enums.StateEnum
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MangaUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    alternativeTitles?: MangaUpdatealternativeTitlesInput | string[]
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    originalLanguage?: StringFieldUpdateOperationsInput | string
+    publicationDemographic?: NullableEnumDemographicEnumFieldUpdateOperationsInput | $Enums.DemographicEnum | null
+    status?: EnumStatusEnumFieldUpdateOperationsInput | $Enums.StatusEnum
+    year?: NullableIntFieldUpdateOperationsInput | number | null
+    contentRating?: EnumContentRatingEnumFieldUpdateOperationsInput | $Enums.ContentRatingEnum
+    state?: EnumStateEnumFieldUpdateOperationsInput | $Enums.StateEnum
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -2229,6 +3782,198 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type EnumDemographicEnumNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.DemographicEnum | EnumDemographicEnumFieldRefInput<$PrismaModel> | null
+    in?: $Enums.DemographicEnum[] | ListEnumDemographicEnumFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.DemographicEnum[] | ListEnumDemographicEnumFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumDemographicEnumNullableFilter<$PrismaModel> | $Enums.DemographicEnum | null
+  }
+
+  export type EnumStatusEnumFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusEnum | EnumStatusEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusEnum[] | ListEnumStatusEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusEnum[] | ListEnumStatusEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusEnumFilter<$PrismaModel> | $Enums.StatusEnum
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type EnumContentRatingEnumFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContentRatingEnum | EnumContentRatingEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.ContentRatingEnum[] | ListEnumContentRatingEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContentRatingEnum[] | ListEnumContentRatingEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumContentRatingEnumFilter<$PrismaModel> | $Enums.ContentRatingEnum
+  }
+
+  export type EnumStateEnumFilter<$PrismaModel = never> = {
+    equals?: $Enums.StateEnum | EnumStateEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.StateEnum[] | ListEnumStateEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StateEnum[] | ListEnumStateEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumStateEnumFilter<$PrismaModel> | $Enums.StateEnum
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type MangaCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    alternativeTitles?: SortOrder
+    description?: SortOrder
+    originalLanguage?: SortOrder
+    publicationDemographic?: SortOrder
+    status?: SortOrder
+    year?: SortOrder
+    contentRating?: SortOrder
+    state?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MangaAvgOrderByAggregateInput = {
+    year?: SortOrder
+  }
+
+  export type MangaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    originalLanguage?: SortOrder
+    publicationDemographic?: SortOrder
+    status?: SortOrder
+    year?: SortOrder
+    contentRating?: SortOrder
+    state?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MangaMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    originalLanguage?: SortOrder
+    publicationDemographic?: SortOrder
+    status?: SortOrder
+    year?: SortOrder
+    contentRating?: SortOrder
+    state?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MangaSumOrderByAggregateInput = {
+    year?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumDemographicEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DemographicEnum | EnumDemographicEnumFieldRefInput<$PrismaModel> | null
+    in?: $Enums.DemographicEnum[] | ListEnumDemographicEnumFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.DemographicEnum[] | ListEnumDemographicEnumFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumDemographicEnumNullableWithAggregatesFilter<$PrismaModel> | $Enums.DemographicEnum | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumDemographicEnumNullableFilter<$PrismaModel>
+    _max?: NestedEnumDemographicEnumNullableFilter<$PrismaModel>
+  }
+
+  export type EnumStatusEnumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusEnum | EnumStatusEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusEnum[] | ListEnumStatusEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusEnum[] | ListEnumStatusEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusEnumWithAggregatesFilter<$PrismaModel> | $Enums.StatusEnum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusEnumFilter<$PrismaModel>
+    _max?: NestedEnumStatusEnumFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type EnumContentRatingEnumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContentRatingEnum | EnumContentRatingEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.ContentRatingEnum[] | ListEnumContentRatingEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContentRatingEnum[] | ListEnumContentRatingEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumContentRatingEnumWithAggregatesFilter<$PrismaModel> | $Enums.ContentRatingEnum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumContentRatingEnumFilter<$PrismaModel>
+    _max?: NestedEnumContentRatingEnumFilter<$PrismaModel>
+  }
+
+  export type EnumStateEnumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StateEnum | EnumStateEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.StateEnum[] | ListEnumStateEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StateEnum[] | ListEnumStateEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumStateEnumWithAggregatesFilter<$PrismaModel> | $Enums.StateEnum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStateEnumFilter<$PrismaModel>
+    _max?: NestedEnumStateEnumFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2239,6 +3984,43 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type MangaCreatealternativeTitlesInput = {
+    set: string[]
+  }
+
+  export type MangaUpdatealternativeTitlesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NullableEnumDemographicEnumFieldUpdateOperationsInput = {
+    set?: $Enums.DemographicEnum | null
+  }
+
+  export type EnumStatusEnumFieldUpdateOperationsInput = {
+    set?: $Enums.StatusEnum
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EnumContentRatingEnumFieldUpdateOperationsInput = {
+    set?: $Enums.ContentRatingEnum
+  }
+
+  export type EnumStateEnumFieldUpdateOperationsInput = {
+    set?: $Enums.StateEnum
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2323,6 +4105,143 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedEnumDemographicEnumNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.DemographicEnum | EnumDemographicEnumFieldRefInput<$PrismaModel> | null
+    in?: $Enums.DemographicEnum[] | ListEnumDemographicEnumFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.DemographicEnum[] | ListEnumDemographicEnumFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumDemographicEnumNullableFilter<$PrismaModel> | $Enums.DemographicEnum | null
+  }
+
+  export type NestedEnumStatusEnumFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusEnum | EnumStatusEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusEnum[] | ListEnumStatusEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusEnum[] | ListEnumStatusEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusEnumFilter<$PrismaModel> | $Enums.StatusEnum
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumContentRatingEnumFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContentRatingEnum | EnumContentRatingEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.ContentRatingEnum[] | ListEnumContentRatingEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContentRatingEnum[] | ListEnumContentRatingEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumContentRatingEnumFilter<$PrismaModel> | $Enums.ContentRatingEnum
+  }
+
+  export type NestedEnumStateEnumFilter<$PrismaModel = never> = {
+    equals?: $Enums.StateEnum | EnumStateEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.StateEnum[] | ListEnumStateEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StateEnum[] | ListEnumStateEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumStateEnumFilter<$PrismaModel> | $Enums.StateEnum
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumDemographicEnumNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DemographicEnum | EnumDemographicEnumFieldRefInput<$PrismaModel> | null
+    in?: $Enums.DemographicEnum[] | ListEnumDemographicEnumFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.DemographicEnum[] | ListEnumDemographicEnumFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumDemographicEnumNullableWithAggregatesFilter<$PrismaModel> | $Enums.DemographicEnum | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumDemographicEnumNullableFilter<$PrismaModel>
+    _max?: NestedEnumDemographicEnumNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatusEnumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusEnum | EnumStatusEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusEnum[] | ListEnumStatusEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusEnum[] | ListEnumStatusEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusEnumWithAggregatesFilter<$PrismaModel> | $Enums.StatusEnum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusEnumFilter<$PrismaModel>
+    _max?: NestedEnumStatusEnumFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumContentRatingEnumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContentRatingEnum | EnumContentRatingEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.ContentRatingEnum[] | ListEnumContentRatingEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContentRatingEnum[] | ListEnumContentRatingEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumContentRatingEnumWithAggregatesFilter<$PrismaModel> | $Enums.ContentRatingEnum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumContentRatingEnumFilter<$PrismaModel>
+    _max?: NestedEnumContentRatingEnumFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStateEnumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StateEnum | EnumStateEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.StateEnum[] | ListEnumStateEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StateEnum[] | ListEnumStateEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumStateEnumWithAggregatesFilter<$PrismaModel> | $Enums.StateEnum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStateEnumFilter<$PrismaModel>
+    _max?: NestedEnumStateEnumFilter<$PrismaModel>
   }
 
 

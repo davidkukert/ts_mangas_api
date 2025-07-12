@@ -41,3 +41,50 @@ model User {
 
   @@map("users")
 }
+
+enum StatusEnum {
+  ongoing
+  completed
+  hiatus
+  cancelled
+}
+
+enum ContentRatingEnum {
+  safe
+  suggestive
+  erotica
+  pornographic
+}
+
+enum StateEnum {
+  draft
+  published
+  submitted
+  rejected
+}
+
+enum DemographicEnum {
+  shounen
+  shoujo
+  seinen
+  josei
+}
+
+model Manga {
+  id String @id @default(ulid())
+
+  title                  String            @unique
+  alternativeTitles      String[]          @default([]) @map("alternative_titles")
+  description            String?
+  originalLanguage       String            @map("original_language")
+  publicationDemographic DemographicEnum?  @map("publication_demographic")
+  status                 StatusEnum
+  year                   Int?
+  contentRating          ContentRatingEnum @map("content_rating")
+  state                  StateEnum
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("mangas")
+}
