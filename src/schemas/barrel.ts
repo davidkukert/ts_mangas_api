@@ -5,5 +5,6 @@ export * from "./StateEnum";
 export * from "./DemographicEnum";
 export * from "./User";
 export * from "./Manga";
+export * from "./Author";
 export * from "./__nullable__";
 export * from "./__transformDate__";

@@ -9,10 +9,16 @@ import type { User } from '@/db/prisma'
 import { permissions } from './permissions'
 import type { Role } from './roles'
 import { allSubject } from './subjects/all'
+import { authorSubject } from './subjects/author'
 import { mangaSubject } from './subjects/manga'
 import { userSubject } from './subjects/user'
 
-const appAbilitiesSchema = z.union([userSubject, allSubject, mangaSubject])
+const appAbilitiesSchema = z.union([
+	userSubject,
+	allSubject,
+	mangaSubject,
+	authorSubject,
+])
 
 export type AppAbilities = z.infer<typeof appAbilitiesSchema>
 export type AppAbility = MongoAbility<AppAbilities>

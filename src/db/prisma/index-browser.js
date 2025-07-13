@@ -144,9 +144,23 @@ exports.Prisma.MangaScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AuthorScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  biography: 'biography',
+  socialLinks: 'socialLinks',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -157,6 +171,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.Role = exports.$Enums.Role = {
   reader: 'reader',
@@ -193,7 +213,8 @@ exports.StateEnum = exports.$Enums.StateEnum = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Manga: 'Manga'
+  Manga: 'Manga',
+  Author: 'Author'
 };
 
 /**
