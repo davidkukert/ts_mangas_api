@@ -8,5 +8,6 @@ export * from "./User";
 export * from "./Manga";
 export * from "./Author";
 export * from "./Tag";
+export * from "./Chapter";
 export * from "./__nullable__";
 export * from "./__transformDate__";

@@ -160,6 +160,18 @@ exports.Prisma.TagScalarFieldEnum = {
   group: 'group'
 };
 
+exports.Prisma.ChapterScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  title: 'title',
+  volume: 'volume',
+  pages: 'pages',
+  translatedLanguage: 'translatedLanguage',
+  mangaId: 'mangaId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -229,7 +241,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Manga: 'Manga',
   Author: 'Author',
-  Tag: 'Tag'
+  Tag: 'Tag',
+  Chapter: 'Chapter'
 };
 
 /**

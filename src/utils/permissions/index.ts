@@ -10,6 +10,7 @@ import { permissions } from './permissions'
 import type { Role } from './roles'
 import { allSubject } from './subjects/all'
 import { authorSubject } from './subjects/author'
+import { chapterSubject } from './subjects/chapter'
 import { mangaSubject } from './subjects/manga'
 import { tagSubject } from './subjects/tag'
 import { userSubject } from './subjects/user'
@@ -20,6 +21,7 @@ const appAbilitiesSchema = z.union([
 	mangaSubject,
 	authorSubject,
 	tagSubject,
+	chapterSubject,
 ])
 
 export type AppAbilities = z.infer<typeof appAbilitiesSchema>

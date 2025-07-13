@@ -56,7 +56,28 @@ export const MangaPlain = t.Object(
   { additionalProperties: false },
 );
 
-export const MangaRelations = t.Object({}, { additionalProperties: false });
+export const MangaRelations = t.Object(
+  {
+    chapters: t.Array(
+      t.Object(
+        {
+          id: t.String(),
+          number: t.String(),
+          title: __nullable__(t.String()),
+          volume: __nullable__(t.String()),
+          pages: t.Integer(),
+          translatedLanguage: t.String(),
+          mangaId: t.String(),
+          createdAt: t.Date(),
+          updatedAt: t.Date(),
+        },
+        { additionalProperties: false },
+      ),
+      { additionalProperties: false },
+    ),
+  },
+  { additionalProperties: false },
+);
 
 export const MangaPlainInputCreate = t.Object(
   {
@@ -171,12 +192,58 @@ export const MangaPlainInputUpdate = t.Object(
 );
 
 export const MangaRelationsInputCreate = t.Object(
-  {},
+  {
+    chapters: t.Optional(
+      t.Object(
+        {
+          connect: t.Array(
+            t.Object(
+              {
+                id: t.String({ additionalProperties: false }),
+              },
+              { additionalProperties: false },
+            ),
+            { additionalProperties: false },
+          ),
+        },
+        { additionalProperties: false },
+      ),
+    ),
+  },
   { additionalProperties: false },
 );
 
 export const MangaRelationsInputUpdate = t.Partial(
-  t.Object({}, { additionalProperties: false }),
+  t.Object(
+    {
+      chapters: t.Partial(
+        t.Object(
+          {
+            connect: t.Array(
+              t.Object(
+                {
+                  id: t.String({ additionalProperties: false }),
+                },
+                { additionalProperties: false },
+              ),
+              { additionalProperties: false },
+            ),
+            disconnect: t.Array(
+              t.Object(
+                {
+                  id: t.String({ additionalProperties: false }),
+                },
+                { additionalProperties: false },
+              ),
+              { additionalProperties: false },
+            ),
+          },
+          { additionalProperties: false },
+        ),
+      ),
+    },
+    { additionalProperties: false },
+  ),
 );
 
 export const MangaWhere = t.Partial(
@@ -343,6 +410,7 @@ export const MangaSelect = t.Partial(
       state: t.Boolean(),
       createdAt: t.Boolean(),
       updatedAt: t.Boolean(),
+      chapters: t.Boolean(),
       _count: t.Boolean(),
     },
     { additionalProperties: false },
@@ -356,6 +424,7 @@ export const MangaInclude = t.Partial(
       status: t.Boolean(),
       contentRating: t.Boolean(),
       state: t.Boolean(),
+      chapters: t.Boolean(),
       _count: t.Boolean(),
     },
     { additionalProperties: false },

@@ -86,6 +86,8 @@ model Manga {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
+  chapters Chapter[]
+
   @@map("mangas")
 }
 
@@ -117,4 +119,23 @@ model Tag {
   group       TagGroupEnum
 
   @@map("tags")
+}
+
+model Chapter {
+  id String @id @default(ulid())
+
+  number             String
+  title              String?
+  volume             String?
+  pages              Int
+  translatedLanguage String  @map("translated_language")
+  mangaId            String  @map("manga_id")
+
+  manga Manga @relation(fields: [mangaId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@unique([mangaId, number])
+  @@map("chapters")
 }
