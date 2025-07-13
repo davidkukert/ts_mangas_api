@@ -6,6 +6,8 @@ export const mangaSubject = z.tuple([
 		z.literal('read'),
 		z.literal('update'),
 		z.literal('delete'),
+		z.literal('upload_cover'),
+		z.literal('delete_cover'),
 		z.literal('manage'),
 	]),
 	z.union([z.literal('Manga')]),
