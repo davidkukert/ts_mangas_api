@@ -3,6 +3,7 @@ import { envVars } from '@/env'
 import { auth } from '@/modules/auth'
 import { authors } from '@/modules/authors'
 import { mangas } from '@/modules/mangas'
+import { tags } from '@/modules/tags'
 import { users } from '@/modules/users'
 import { setup } from '@/setup'
 
@@ -15,6 +16,7 @@ new Elysia({
 	.use(auth)
 	.use(mangas)
 	.use(authors)
+	.use(tags)
 	.listen({ port: envVars.PORT, hostname: '0.0.0.0' }, ({ url }) => {
 		console.log(`API is running at ${url}`)
 	})

@@ -101,3 +101,20 @@ model Author {
 
   @@map("authors")
 }
+
+enum TagGroupEnum {
+  genre
+  theme
+  format
+  content
+}
+
+model Tag {
+  id String @id @default(ulid())
+
+  name        String       @unique
+  description String?
+  group       TagGroupEnum
+
+  @@map("tags")
+}

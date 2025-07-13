@@ -153,6 +153,13 @@ exports.Prisma.AuthorScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  group: 'group'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -211,10 +218,18 @@ exports.StateEnum = exports.$Enums.StateEnum = {
   rejected: 'rejected'
 };
 
+exports.TagGroupEnum = exports.$Enums.TagGroupEnum = {
+  genre: 'genre',
+  theme: 'theme',
+  format: 'format',
+  content: 'content'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Manga: 'Manga',
-  Author: 'Author'
+  Author: 'Author',
+  Tag: 'Tag'
 };
 
 /**

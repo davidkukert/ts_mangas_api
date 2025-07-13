@@ -11,6 +11,7 @@ import type { Role } from './roles'
 import { allSubject } from './subjects/all'
 import { authorSubject } from './subjects/author'
 import { mangaSubject } from './subjects/manga'
+import { tagSubject } from './subjects/tag'
 import { userSubject } from './subjects/user'
 
 const appAbilitiesSchema = z.union([
@@ -18,6 +19,7 @@ const appAbilitiesSchema = z.union([
 	allSubject,
 	mangaSubject,
 	authorSubject,
+	tagSubject,
 ])
 
 export type AppAbilities = z.infer<typeof appAbilitiesSchema>
