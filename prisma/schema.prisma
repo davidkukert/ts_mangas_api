@@ -5,9 +5,15 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider        = "prisma-client-js"
+  provider        = "prisma-client"
   previewFeatures = ["queryCompiler", "driverAdapters"]
   output          = "../src/db/prisma"
+
+  // Optional
+  runtime                = "bun"
+  moduleFormat           = "esm"
+  generatedFileExtension = "ts"
+  importFileExtension    = "ts"
 }
 
 datasource db {
@@ -86,6 +92,9 @@ model Manga {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
+  authors MangaAuthor[]
+  tags    Tag[]         @relation("mangas_tags")
+
   chapters Chapter[]
 
   @@map("mangas")
@@ -100,6 +109,8 @@ model Author {
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  mangas MangaAuthor[]
 
   @@map("authors")
 }
@@ -117,6 +128,8 @@ model Tag {
   name        String       @unique
   description String?
   group       TagGroupEnum
+
+  mangas Manga[] @relation("mangas_tags")
 
   @@map("tags")
 }
@@ -138,4 +151,22 @@ model Chapter {
 
   @@unique([mangaId, number])
   @@map("chapters")
+}
+
+enum MangaAuthorRoleEnum {
+  author
+  artist
+}
+
+model MangaAuthor {
+  id       Int                 @id @default(autoincrement())
+  mangaId  String              @map("manga_id")
+  authorId String              @map("author_id")
+  role     MangaAuthorRoleEnum
+
+  manga  Manga  @relation(fields: [mangaId], references: [id], onDelete: Cascade)
+  author Author @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@unique([mangaId, authorId])
+  @@map("manga_authors")
 }
