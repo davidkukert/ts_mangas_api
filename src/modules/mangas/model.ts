@@ -1,5 +1,6 @@
 import Elysia, { t } from 'elysia'
 import { MangaInputCreate, MangaInputUpdate, MangaPlain } from '@/schemas/Manga'
+import { MangaAuthorRoleEnum } from '@/schemas/MangaAuthorRoleEnum'
 
 export const MangaModel = new Elysia({
 	name: 'MangaModel',
@@ -11,5 +12,8 @@ export const MangaModel = new Elysia({
 	}),
 	'manga.list': t.Object({
 		data: t.Array(MangaPlain),
+	}),
+	'manga.author.add': t.Object({
+		role: MangaAuthorRoleEnum,
 	}),
 })

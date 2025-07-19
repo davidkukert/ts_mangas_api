@@ -9,9 +9,10 @@ export const tags = new Elysia({
 	prefix: '/tags',
 })
 	.use(setup)
-	.use(prismaErrors({ name: 'Tag' }))
+	.use(prismaErrors({ customErrors: { name: 'Tag' } }))
 	.use(TagModel)
 	.use(AuthService)
+	.guard({ prismaErrors: {} })
 	.get(
 		'/',
 		async ({ db }) => {

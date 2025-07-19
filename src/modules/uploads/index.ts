@@ -50,8 +50,6 @@ export const uploads = new Elysia({
 				throw HttpError.NotFound('Cover not found')
 			}
 
-			console.log('Content-Type:', cover)
-
 			return new Response(cover.stream(), {
 				headers: {
 					'Content-Type': 'image/avif',

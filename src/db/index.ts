@@ -1,7 +1,7 @@
 import { PrismaPg } from '@prisma/adapter-pg'
 import Elysia from 'elysia'
 import { envVars } from '@/env'
-import { PrismaClient } from './prisma'
+import { PrismaClient } from './prisma/client'
 
 const adapter = new PrismaPg({
 	connectionString: envVars.DATABASE_URL,

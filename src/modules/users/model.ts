@@ -1,7 +1,7 @@
 import Elysia, { t } from 'elysia'
-import { User, UserInputCreate, UserInputUpdate } from '@/schemas/User'
+import { UserInputCreate, UserInputUpdate, UserPlain } from '@/schemas/User'
 
-const UserSelect = t.Omit(User, ['password'])
+const UserSelect = t.Omit(UserPlain, ['password'])
 const UserShow = t.Object({
 	data: UserSelect,
 })

@@ -22,7 +22,67 @@ export const TagPlain = t.Object(
   { additionalProperties: false },
 );
 
-export const TagRelations = t.Object({}, { additionalProperties: false });
+export const TagRelations = t.Object(
+  {
+    mangas: t.Array(
+      t.Object(
+        {
+          id: t.String(),
+          title: t.String(),
+          alternativeTitles: t.Array(t.String(), {
+            additionalProperties: false,
+          }),
+          description: __nullable__(t.String()),
+          originalLanguage: t.String(),
+          publicationDemographic: __nullable__(
+            t.Union(
+              [
+                t.Literal("shounen"),
+                t.Literal("shoujo"),
+                t.Literal("seinen"),
+                t.Literal("josei"),
+              ],
+              { additionalProperties: false },
+            ),
+          ),
+          status: t.Union(
+            [
+              t.Literal("ongoing"),
+              t.Literal("completed"),
+              t.Literal("hiatus"),
+              t.Literal("cancelled"),
+            ],
+            { additionalProperties: false },
+          ),
+          year: __nullable__(t.Integer()),
+          contentRating: t.Union(
+            [
+              t.Literal("safe"),
+              t.Literal("suggestive"),
+              t.Literal("erotica"),
+              t.Literal("pornographic"),
+            ],
+            { additionalProperties: false },
+          ),
+          state: t.Union(
+            [
+              t.Literal("draft"),
+              t.Literal("published"),
+              t.Literal("submitted"),
+              t.Literal("rejected"),
+            ],
+            { additionalProperties: false },
+          ),
+          createdAt: t.Date(),
+          updatedAt: t.Date(),
+        },
+        { additionalProperties: false },
+      ),
+      { additionalProperties: false },
+    ),
+  },
+  { additionalProperties: false },
+);
 
 export const TagPlainInputCreate = t.Object(
   {
@@ -61,12 +121,58 @@ export const TagPlainInputUpdate = t.Object(
 );
 
 export const TagRelationsInputCreate = t.Object(
-  {},
+  {
+    mangas: t.Optional(
+      t.Object(
+        {
+          connect: t.Array(
+            t.Object(
+              {
+                id: t.String({ additionalProperties: false }),
+              },
+              { additionalProperties: false },
+            ),
+            { additionalProperties: false },
+          ),
+        },
+        { additionalProperties: false },
+      ),
+    ),
+  },
   { additionalProperties: false },
 );
 
 export const TagRelationsInputUpdate = t.Partial(
-  t.Object({}, { additionalProperties: false }),
+  t.Object(
+    {
+      mangas: t.Partial(
+        t.Object(
+          {
+            connect: t.Array(
+              t.Object(
+                {
+                  id: t.String({ additionalProperties: false }),
+                },
+                { additionalProperties: false },
+              ),
+              { additionalProperties: false },
+            ),
+            disconnect: t.Array(
+              t.Object(
+                {
+                  id: t.String({ additionalProperties: false }),
+                },
+                { additionalProperties: false },
+              ),
+              { additionalProperties: false },
+            ),
+          },
+          { additionalProperties: false },
+        ),
+      ),
+    },
+    { additionalProperties: false },
+  ),
 );
 
 export const TagWhere = t.Partial(
@@ -157,6 +263,7 @@ export const TagSelect = t.Partial(
       name: t.Boolean(),
       description: t.Boolean(),
       group: t.Boolean(),
+      mangas: t.Boolean(),
       _count: t.Boolean(),
     },
     { additionalProperties: false },
@@ -165,7 +272,7 @@ export const TagSelect = t.Partial(
 
 export const TagInclude = t.Partial(
   t.Object(
-    { group: t.Boolean(), _count: t.Boolean() },
+    { group: t.Boolean(), mangas: t.Boolean(), _count: t.Boolean() },
     { additionalProperties: false },
   ),
 );

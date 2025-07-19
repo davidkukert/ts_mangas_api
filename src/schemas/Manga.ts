@@ -58,6 +58,40 @@ export const MangaPlain = t.Object(
 
 export const MangaRelations = t.Object(
   {
+    authors: t.Array(
+      t.Object(
+        {
+          id: t.Integer(),
+          mangaId: t.String(),
+          authorId: t.String(),
+          role: t.Union([t.Literal("author"), t.Literal("artist")], {
+            additionalProperties: false,
+          }),
+        },
+        { additionalProperties: false },
+      ),
+      { additionalProperties: false },
+    ),
+    tags: t.Array(
+      t.Object(
+        {
+          id: t.String(),
+          name: t.String(),
+          description: __nullable__(t.String()),
+          group: t.Union(
+            [
+              t.Literal("genre"),
+              t.Literal("theme"),
+              t.Literal("format"),
+              t.Literal("content"),
+            ],
+            { additionalProperties: false },
+          ),
+        },
+        { additionalProperties: false },
+      ),
+      { additionalProperties: false },
+    ),
     chapters: t.Array(
       t.Object(
         {
@@ -193,6 +227,38 @@ export const MangaPlainInputUpdate = t.Object(
 
 export const MangaRelationsInputCreate = t.Object(
   {
+    authors: t.Optional(
+      t.Object(
+        {
+          connect: t.Array(
+            t.Object(
+              {
+                id: t.Integer({ additionalProperties: false }),
+              },
+              { additionalProperties: false },
+            ),
+            { additionalProperties: false },
+          ),
+        },
+        { additionalProperties: false },
+      ),
+    ),
+    tags: t.Optional(
+      t.Object(
+        {
+          connect: t.Array(
+            t.Object(
+              {
+                id: t.String({ additionalProperties: false }),
+              },
+              { additionalProperties: false },
+            ),
+            { additionalProperties: false },
+          ),
+        },
+        { additionalProperties: false },
+      ),
+    ),
     chapters: t.Optional(
       t.Object(
         {
@@ -216,6 +282,56 @@ export const MangaRelationsInputCreate = t.Object(
 export const MangaRelationsInputUpdate = t.Partial(
   t.Object(
     {
+      authors: t.Partial(
+        t.Object(
+          {
+            connect: t.Array(
+              t.Object(
+                {
+                  id: t.Integer({ additionalProperties: false }),
+                },
+                { additionalProperties: false },
+              ),
+              { additionalProperties: false },
+            ),
+            disconnect: t.Array(
+              t.Object(
+                {
+                  id: t.Integer({ additionalProperties: false }),
+                },
+                { additionalProperties: false },
+              ),
+              { additionalProperties: false },
+            ),
+          },
+          { additionalProperties: false },
+        ),
+      ),
+      tags: t.Partial(
+        t.Object(
+          {
+            connect: t.Array(
+              t.Object(
+                {
+                  id: t.String({ additionalProperties: false }),
+                },
+                { additionalProperties: false },
+              ),
+              { additionalProperties: false },
+            ),
+            disconnect: t.Array(
+              t.Object(
+                {
+                  id: t.String({ additionalProperties: false }),
+                },
+                { additionalProperties: false },
+              ),
+              { additionalProperties: false },
+            ),
+          },
+          { additionalProperties: false },
+        ),
+      ),
       chapters: t.Partial(
         t.Object(
           {
@@ -410,6 +526,8 @@ export const MangaSelect = t.Partial(
       state: t.Boolean(),
       createdAt: t.Boolean(),
       updatedAt: t.Boolean(),
+      authors: t.Boolean(),
+      tags: t.Boolean(),
       chapters: t.Boolean(),
       _count: t.Boolean(),
     },
@@ -424,6 +542,8 @@ export const MangaInclude = t.Partial(
       status: t.Boolean(),
       contentRating: t.Boolean(),
       state: t.Boolean(),
+      authors: t.Boolean(),
+      tags: t.Boolean(),
       chapters: t.Boolean(),
       _count: t.Boolean(),
     },

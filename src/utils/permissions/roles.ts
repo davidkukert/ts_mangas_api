@@ -1,8 +1,8 @@
 import z from 'zod'
-import { $Enums } from '@/db/prisma'
+import { Role as RoleEnum } from '@/db/prisma/enums'
 
 export const role = z.union([
-	z.enum($Enums.Role),
+	z.enum(RoleEnum),
 	z.literal('guest').default('guest'),
 ])
 

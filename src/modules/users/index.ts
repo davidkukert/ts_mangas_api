@@ -6,9 +6,10 @@ import { UserModel } from './model'
 
 export const users = new Elysia({ name: 'Module.Users', prefix: '/users' })
 	.use(setup)
-	.use(prismaErrors({ name: 'User' }))
+	.use(prismaErrors({ customErrors: { name: 'User' } }))
 	.use(UserModel)
 	.use(AuthService)
+	.guard({ prismaErrors: {} })
 	.get(
 		'/',
 		async ({ db }) => {

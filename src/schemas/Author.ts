@@ -16,7 +16,25 @@ export const AuthorPlain = t.Object(
   { additionalProperties: false },
 );
 
-export const AuthorRelations = t.Object({}, { additionalProperties: false });
+export const AuthorRelations = t.Object(
+  {
+    mangas: t.Array(
+      t.Object(
+        {
+          id: t.Integer(),
+          mangaId: t.String(),
+          authorId: t.String(),
+          role: t.Union([t.Literal("author"), t.Literal("artist")], {
+            additionalProperties: false,
+          }),
+        },
+        { additionalProperties: false },
+      ),
+      { additionalProperties: false },
+    ),
+  },
+  { additionalProperties: false },
+);
 
 export const AuthorPlainInputCreate = t.Object(
   {
@@ -37,12 +55,58 @@ export const AuthorPlainInputUpdate = t.Object(
 );
 
 export const AuthorRelationsInputCreate = t.Object(
-  {},
+  {
+    mangas: t.Optional(
+      t.Object(
+        {
+          connect: t.Array(
+            t.Object(
+              {
+                id: t.Integer({ additionalProperties: false }),
+              },
+              { additionalProperties: false },
+            ),
+            { additionalProperties: false },
+          ),
+        },
+        { additionalProperties: false },
+      ),
+    ),
+  },
   { additionalProperties: false },
 );
 
 export const AuthorRelationsInputUpdate = t.Partial(
-  t.Object({}, { additionalProperties: false }),
+  t.Object(
+    {
+      mangas: t.Partial(
+        t.Object(
+          {
+            connect: t.Array(
+              t.Object(
+                {
+                  id: t.Integer({ additionalProperties: false }),
+                },
+                { additionalProperties: false },
+              ),
+              { additionalProperties: false },
+            ),
+            disconnect: t.Array(
+              t.Object(
+                {
+                  id: t.Integer({ additionalProperties: false }),
+                },
+                { additionalProperties: false },
+              ),
+              { additionalProperties: false },
+            ),
+          },
+          { additionalProperties: false },
+        ),
+      ),
+    },
+    { additionalProperties: false },
+  ),
 );
 
 export const AuthorWhere = t.Partial(
@@ -123,6 +187,7 @@ export const AuthorSelect = t.Partial(
       socialLinks: t.Boolean(),
       createdAt: t.Boolean(),
       updatedAt: t.Boolean(),
+      mangas: t.Boolean(),
       _count: t.Boolean(),
     },
     { additionalProperties: false },
@@ -130,7 +195,10 @@ export const AuthorSelect = t.Partial(
 );
 
 export const AuthorInclude = t.Partial(
-  t.Object({ _count: t.Boolean() }, { additionalProperties: false }),
+  t.Object(
+    { mangas: t.Boolean(), _count: t.Boolean() },
+    { additionalProperties: false },
+  ),
 );
 
 export const AuthorOrderBy = t.Partial(

@@ -9,9 +9,10 @@ export const chapters = new Elysia({
 	prefix: '/chapters',
 })
 	.use(setup)
-	.use(prismaErrors({ name: 'Chapter' }))
+	.use(prismaErrors({ customErrors: { name: 'Chapter' } }))
 	.use(ChapterModel)
 	.use(AuthService)
+	.guard({ prismaErrors: {} })
 	.get(
 		'/',
 		async ({ db }) => {

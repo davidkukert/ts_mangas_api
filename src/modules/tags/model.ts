@@ -1,5 +1,5 @@
 import Elysia, { t } from 'elysia'
-import { Tag, TagInputCreate, TagInputUpdate } from '@/schemas/Tag'
+import { TagInputCreate, TagInputUpdate, TagPlain } from '@/schemas/Tag'
 
 export const TagModel = new Elysia({
 	name: 'TagModel',
@@ -7,9 +7,9 @@ export const TagModel = new Elysia({
 	'tag.create': TagInputCreate,
 	'tag.update': TagInputUpdate,
 	'tag.show': t.Object({
-		data: Tag,
+		data: TagPlain,
 	}),
 	'tag.list': t.Object({
-		data: t.Array(Tag),
+		data: t.Array(TagPlain),
 	}),
 })
